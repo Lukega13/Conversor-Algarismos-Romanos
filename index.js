@@ -11,59 +11,84 @@ var result = document.getElementById("answer-input")
 
 number.addEventListener("keyup", identifyNumber)
 
+
+function numberConverter(n) {
+    if (n == 'I') {
+        n = 1
+        return n
+    }
+
+    if (n == 'V') {
+        n = 5
+        return n
+    }
+
+    if (n == 'X') {
+        n = 10
+        return n
+    }
+
+    if (n == 'L') {
+        n = 50
+        return n
+    }
+
+    if (n == 'C') {
+        n = 100
+        return n
+    }
+
+    if (n == 'D') {
+        n = 500
+        return n
+    }
+
+    if (n == 'M') {
+        n = 1000
+        return n
+    }
+}
+
+
+
 function identifyNumber() {
 
     numero = number.value.toUpperCase()
-    calculo = 0
-
+    resultado = 0
 
     for (i = 0; i < numero.length; i++) {
 
-        if (numero[i] == 'I') {
-            resultado = 1
-        }
+        atual = numero[i]
+        ant = numero[i - 1]
 
-        if (numero[i] == 'V') {
-            resultado = 5
-        }
+        numero_atual = numberConverter(atual)
+        numero_ant = numberConverter(ant)
 
-        if (numero[i] == 'X') {
-            resultado = 10
-        }
+        if (ant != undefined) {
 
-        if (numero[i - 1] == 'I') {
-            resultado1 = 1
-        }
-
-        if (numero[i - 1] == 'V') {
-            resultado1 = 5
-        }
-
-        if (numero[i - 1] == 'X') {
-            resultado1 = 10
-        }
-
-
-        if (numero[i - 1] != undefined) {
-
-            if (numero[i] <= numero[i - 1]) {
-                calculo += resultado
+            if (numero_atual <= numero_ant) {
+                resultado += numero_atual
             }
 
-            if (numero[i] > numero[i - 1]) {
-                calculo += Math.abs(resultado - resultado1) - resultado1
+            if (numero_atual > numero_ant) {
+                resultado -= numero_atual
             }
 
         }
 
-        if (numero[i - 1] == undefined) {
+        if (ant == undefined) {
 
-            calculo += resultado
+            resultado += numero_atual
 
         }
 
     }
 
-    result.value = calculo
+    if (resultado < 0) {
+        resultado = Math.abs(resultado)
+        result.value = resultado
+    } else {
+        result.value = resultado
+    }
 
 }
