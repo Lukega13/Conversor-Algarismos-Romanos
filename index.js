@@ -67,10 +67,12 @@ function identifyNumber() {
         if (ant != undefined) {
 
             if (numero_atual <= numero_ant) {
+
                 resultado += numero_atual
             }
 
             if (numero_atual > numero_ant) {
+
                 resultado -= numero_atual
             }
 
@@ -85,10 +87,14 @@ function identifyNumber() {
     }
 
     if (resultado < 0) {
+
         resultado = Math.abs(resultado)
         result.value = resultado
+
     } else {
+
         result.value = resultado
+
     }
 
 }
